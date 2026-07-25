@@ -126,8 +126,25 @@ export const connectWallet = async (
 ): Promise<ConnectResult> => {
   const sdk = await ensureKit(network);
   try {
+    const supportedWallets = await sdk.StellarWalletsKit.refreshSupportedWallets();
+    const wallet = supportedWallets.find(
+      (candidate) => candidate.id === walletId,
+    );
+
+    if (!wallet) {
+      throw new Error(`Wallet "${walletId}" is not supported by the current setup.`);
+    }
+
+    if (!wallet.isAvailable) {
+      const installHint =
+        walletId === 'freighter'
+          ? 'Freighter is not installed or enabled in this browser. Install the extension and try again.'
+          : `${wallet.name ?? walletId} is not available on this device. Install it or enable it and try again.`;
+      throw new Error(installHint);
+    }
+
     sdk.StellarWalletsKit.setWallet(walletId);
-    const { address } = await sdk.StellarWalletsKit.getAddress();
+    const { address } = await sdk.StellarWalletsKit.fetchAddress();
     if (!address) {
       throw new Error(
         'Wallet did not return an address. Make sure it is unlocked and the connection was approved.',
