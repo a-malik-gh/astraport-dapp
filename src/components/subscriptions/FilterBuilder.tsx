@@ -54,7 +54,7 @@ export const FilterBuilder: React.FC<FilterBuilderProps> = ({
       {filters.map((filter, index) => (
         <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 rounded">
           <span className="text-sm text-gray-700">
-            {filter.field} {filter.operator} "{filter.value}"
+            {filter.field} {filter.operator} &quot;{filter.value}&quot;
           </span>
           <button
             onClick={() => removeFilter(index)}

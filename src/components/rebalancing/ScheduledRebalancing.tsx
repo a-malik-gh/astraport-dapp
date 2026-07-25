@@ -8,7 +8,7 @@ import {
   AllocationTarget,
   STRATEGY_META,
 } from '@/types/rebalancing';
-import { formatPercent } from '@/utils';
+
 
 const FREQUENCY_OPTIONS: { value: ScheduleFrequency; label: string }[] = [
   { value: 'daily', label: 'Daily' },
