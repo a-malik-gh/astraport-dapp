@@ -144,7 +144,7 @@ export const connectWallet = async (
     }
 
     sdk.StellarWalletsKit.setWallet(walletId);
-    const { address } = await sdk.StellarWalletsKit.getAddress();
+    const { address } = await sdk.StellarWalletsKit.fetchAddress();
     if (!address) {
       throw new Error(
         'Wallet did not return an address. Make sure it is unlocked and the connection was approved.',
