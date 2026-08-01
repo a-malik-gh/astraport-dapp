@@ -68,6 +68,7 @@ export interface ChartDataPoint {
 }
 
 // Export staking types
+export * from './audit';
 export * from './staking';
 export * from './ai';
 export * from './subscriptions';
